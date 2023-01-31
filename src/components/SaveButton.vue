@@ -46,16 +46,17 @@ export default {
     cursor: pointer;
   }
 }
+
 @media(max-width: 630px) {
- .profile-btn {
-   position: fixed;
-   bottom: 0;
-   left: 0;
-   rihgt: 0;
-   width: 100%;
-   border-radius: 0;
-   padding: 14px;
- }
+  .profile-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    rihgt: 0;
+    width: 100%;
+    border-radius: 0;
+    padding: 14px;
+  }
 }
 
 </style>

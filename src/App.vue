@@ -35,6 +35,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 .h1 {
   color: #000;
   font-size: 20px;
@@ -58,9 +59,9 @@ export default {
 .form-group {
   margin-bottom: 8px;
 
-& .form-control {
+  & .form-control, & input.form-control {
     display: block;
-    width: 150px;
+    width: 150px !important;
     height: 35px;
     padding: 0 12px;
     font-size: 16px;
@@ -71,7 +72,7 @@ export default {
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   }
 }
 
@@ -100,8 +101,9 @@ input:focus-visible {
   .form-wr {
     flex-wrap: wrap;
     justify-content: center;
-    & .form-control {
-      width: 149px;
+
+    & .form-control, & input.form-control {
+      width: 149px !important;
     }
   }
 

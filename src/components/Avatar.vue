@@ -21,7 +21,7 @@
           </button>
         </div>
         <transition name="fade">
-          <div class="user-avatar__upload-list" v-if="isListOpen">
+          <div class="user-avatar__upload-list" v-if="isListOpen" v-on:click="hideList" ref="uploadMenu">
             <p class="user-avatar__dialog-btn">Загрузить</p>
             <p class="user-avatar__dialog-btn">Удалить</p>
           </div>
@@ -76,7 +76,6 @@ export default {
       return `/img/avatar.png`;
     },
   },
-
   mounted() {
     this.popupItem = this.$el;
   },
@@ -84,8 +83,12 @@ export default {
   methods: {
     toggleList() {
       if (!this.isListOpen) {
-        this.isListOpen = true
+        this.isListOpen = true;
       } else this.isListOpen = false;
+    },
+
+    hideList() {
+      this.isListOpen = false;
     },
   },
 };
