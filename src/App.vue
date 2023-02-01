@@ -73,6 +73,11 @@ export default {
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    &--code {
+      width: 30px !important;
+      margin-right: 5px;
+    }
   }
 }
 
@@ -104,6 +109,11 @@ input:focus-visible {
 
     & .form-control, & input.form-control {
       width: 149px !important;
+
+      &--code {
+        width: 22px !important;
+        margin-right: 2px;
+      }
     }
   }
 

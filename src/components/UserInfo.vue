@@ -1,3 +1,32 @@
+<script setup>
+
+let curcode = '';
+const vCode = {
+  beforeMount: (el) => {
+    curcode = el.value;
+  }
+}
+
+const vPhoneMask = {
+  beforeMount: (el) => {
+    el.oninput = function (e) {
+      if (!e.isTrusted) {
+        return
+      }
+
+      const x = this.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/)
+
+      if (curcode === 'ru') {
+        x[1] = '+7';
+        this.value = !x[3] ? x[1] + ' (' + x[2] : x[1] + ' (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '')
+      }
+      //Иные маски ввода
+      else this.value = '';
+    }
+  }
+}
+</script>
+
 <template>
   <div class="info">
     <h1 class="h1">Hастройки</h1>
@@ -40,8 +69,9 @@
         <div class="label">
           <label>Телефон</label>
         </div>
-        <div class="">
-          <input v-model="phone" class="form-control"/>
+        <div class="row">
+          <input v-code :value="countryCode" class="form-control form-control--code"/>
+          <input v-model="phone" class="form-control" v-phone-mask/>
         </div>
       </div>
       <div class="row form-group">
@@ -50,7 +80,6 @@
         </div>
         <select name="multiSelect" id="multiSelect" multiple multiselect-search="true" multiselect-select-all="true"
                 multiselect-max-items="3"
-                onchange="multiSelect.innerHTML='<option value='+languages[0].code+'>'+languages[0].name+'</option><option selected value='+languages[1].code+'>'+languages[1].name+'</option><option value='+languages[2]+'>'+languages[2].name+'</option>';"
                 onblur="multiSelect.loadOptions()">
           <option value={{languageSelected.code}}>{{ languageSelected.name }}</option>
           <option v-for="option in languagesOptions" v-bind:key="option.code">{{ option.name }}</option>
@@ -79,6 +108,7 @@ export default {
       date: "",
       phone: '',
       city: '',
+      countryCode: 'ru',
       phones: [],
       languageSelected: {name: 'Русский', code: 'ru'},
       languagesOptions: [
@@ -88,7 +118,6 @@ export default {
       mySelect
     };
   },
-
   methods: {
     isRequired(value) {
       if (!value) {
@@ -156,7 +185,7 @@ export default {
   border-radius: 20px;
 }
 
-.multiselect-dropdown span.optext:hover{
+.multiselect-dropdown span.optext:hover {
   background: #eaeaea;
   cursor: pointer;
 }
